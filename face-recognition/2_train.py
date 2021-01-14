@@ -23,22 +23,35 @@ def readImgs(path: str) -> tuple:
     imagePaths: list = [os.path.join(path, file) for file in os.listdir(path)]
     faceSamples: list = []
     labels: list = []
+    _ids: list = []
+
+    users: int = 1
+    names: dict = {'None': 0}
 
     for imagePath in imagePaths:
         # Convert to grayscale
         img: np.array = np.array(Image.open(imagePath).convert("L"))
 
-        # Get image id
-        _id = int(os.path.split(imagePath)[-1].split(".")[1])
+        # Get image name, id
+        name, _id = os.path.split(imagePath)[-1].split("_")
+
         # Get detected face
         faces = detector.detectMultiScale(img)
 
         # Add faces
         for (x, y, w, h) in faces:
             faceSamples.append(img[y:y+h, x:x+w])
-            labels.append(_id)
+            _ids.append(int(_id.split(".")[0]))
 
-    return faceSamples, labels
+            if name not in names:
+                names[name] = users
+                users += 1
+            
+            labels.append(names[name])
+
+    print(names)
+
+    return faceSamples, labels, _ids
 
 
 def train() -> None:
@@ -48,15 +61,15 @@ def train() -> None:
     print("Training faces... Wait...")
     recognizer = cv2.face.LBPHFaceRecognizer_create()
 
-    # Get faces and labels
-    faces, labels = readImgs(PATH)
+    # Get faces, labels, ids
+    faces, labels, _ids = readImgs(PATH)
     # Recognize face
     recognizer.train(faces, np.array(labels))
 
     # Save the model
     recognizer.write("training.yml")
 
-    print(f"\n{len(np.unique(labels))} faces trained.")
+    print(f"\n{len(np.unique(_ids))} faces trained.")
 
 
 if __name__ == "__main__":
