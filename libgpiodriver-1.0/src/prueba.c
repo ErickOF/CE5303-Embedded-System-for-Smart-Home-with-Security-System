@@ -1,5 +1,7 @@
 #include <gpio_driver.h>
 #include <stdio.h>
+#include <unistd.h>
+
 int main(){
     printf("--------GPIO DRIVER-----------\n");
     printf("Init the pointers.\n");
