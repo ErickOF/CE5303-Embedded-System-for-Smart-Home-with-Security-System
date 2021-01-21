@@ -3,6 +3,8 @@ from flask import json, jsonify
 from flask import request, send_file
 from flask_cors import CORS
 
+import cv2
+
 from config import server_config as sconf
 from config.constants import *
 
@@ -11,7 +13,10 @@ from controllers import db
 from controllers import webcam
 from controllers import doors
 from controllers import lights
+from controllers import face_recognition
 
+
+img_path: str = ''
 
 # Creating an basic app
 app = Flask(__name__)
@@ -184,6 +189,7 @@ def get_door_state():
 
 @app.route('/home/take_photo', methods=['GET'])
 def take_photo():
+    global img_path
     """
     This function is used to take a photo of a room.
     """
@@ -191,6 +197,16 @@ def take_photo():
 
     return send_file(img_path)
 
+@app.route('/home/detect_face', methods=['GET'])
+def detect_face():
+    global img_path
+    """
+    This function is used to take a photo of a room.
+    """
+    img = cv2.imread(img_path,0)
+    response = face_recognition.recognizeFace(img)
+
+    return jsonify(response)
 
 if __name__ == '__main__':
     gpioman.init_gpio_pins()
