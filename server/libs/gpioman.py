@@ -18,7 +18,8 @@ def init_gpio_pins() -> None:
     _init_gpio_pins = gpioman_lib.init_gpio_pins
     _init_gpio_pins.restype = None
     
-    return _init_gpio_pins()
+    _init_gpio_pins()
+    return
 
 # int pinMode(int PIN, int DIRECTION);
 #def pin_mode(pin: int, direction: int) -> int:
@@ -28,11 +29,12 @@ def init_gpio_pins() -> None:
 #    return _pin_mode(c_int(pin), c_int(direction))
 
 # void set_gpio_mode(int pin, unsigned char mode);
-def set_gpio_mode(pin: int, mode: str) -> None:
+def set_gpio_mode(pin: int, mode: int) -> None:
     _set_gpio_mode = gpioman_lib.set_gpio_mode
-    _set_gpio_mode = gpioman_lib.restype = None
+    _set_gpio_mode.restype = None
     
-    return _set_gpio_mode(c_int(pin), c_ubyte(mode))
+    _set_gpio_mode(c_int(pin), c_ubyte(mode))
+    return
 
 # int digitalWrite(int pin, int value);
 #def digital_write(pin: int, direction: int) -> int:
@@ -46,7 +48,8 @@ def gpio_write(pin: int, bit: int) -> None:
     _gpio_write = gpioman_lib.gpio_write
     _gpio_write.restype = None
     
-    return _gpio_write(c_int(pin), c_ubyte(str(bit)))
+    _gpio_write(c_int(pin), c_ubyte(bit))
+    return
 
 # int digitalRead(int pin);
 #def digital_read(pin: int) -> int:

@@ -6,6 +6,7 @@ from flask_cors import CORS
 from config import server_config as sconf
 from config.constants import *
 
+from libs import gpioman 
 from controllers import db
 from controllers import webcam
 from controllers import doors
@@ -192,6 +193,7 @@ def take_photo():
 
 
 if __name__ == '__main__':
+    gpioman.init_gpio_pins()
     lights.start()
     doors.start()
     app.run(host=sconf.HOST, port=sconf.PORT)

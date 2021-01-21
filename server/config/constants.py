@@ -9,9 +9,9 @@ LOW: int = 0
 
 
 # When setting pin_mode to read values
-INPUT_MODE: str = '0'
+INPUT_MODE: int = 0
 # When setting pin_mode to write values
-OUTPUT_MODE: str = '1'
+OUTPUT_MODE: int = 1
 # When some function does not reach the goal, returns -1
 
 

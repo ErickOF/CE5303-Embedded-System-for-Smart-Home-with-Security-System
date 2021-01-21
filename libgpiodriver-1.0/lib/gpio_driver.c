@@ -4,7 +4,8 @@
 #include <fcntl.h> 
 #include <unistd.h>
 #include <stdio.h>
-static unsigned GPIO_BASE = 0xfe200000;
+
+static unsigned GPIO_BASE = 0x3f200000;
 //Registers pointers
 volatile unsigned int * gpset0;
 volatile unsigned int * gpclr0;
@@ -30,7 +31,7 @@ void init_gpio_pins(){
         errx(1, "Error during mapping GPIO");
     }
     gpset0 = gpfsel0 + 0x7;
-	gpclr0 = gpfsel0 + 0xA;
+    gpclr0 = gpfsel0 + 0xA;
     gplev0 = gpfsel0 + 0xD;
 }
 void set_gpio_mode(int pin, unsigned char mode){
