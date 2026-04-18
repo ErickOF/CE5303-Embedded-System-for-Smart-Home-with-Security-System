@@ -5,6 +5,7 @@ import { takeWhile } from 'rxjs/operators';
 import { TrafficChartData } from '../../../@core/data/traffic-chart';
 
 @Component({
+  standalone: false,
   selector: 'ngx-traffic',
   styleUrls: ['./traffic.component.scss'],
   template: `
@@ -25,10 +26,10 @@ export class TrafficComponent implements OnDestroy {
 
   private alive = true;
 
-  trafficChartPoints: number[];
+  trafficChartPoints!: number[];
   type = 'month';
   types = ['week', 'month', 'year'];
-  currentTheme: string;
+  currentTheme!: string;
 
   constructor(private themeService: NbThemeService,
               private trafficChartService: TrafficChartData) {

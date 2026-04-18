@@ -6,6 +6,7 @@ import { takeWhile } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 
 @Component({
+  standalone: false,
   selector: 'ngx-electricity',
   styleUrls: ['./electricity.component.scss'],
   templateUrl: './electricity.component.html',
@@ -14,13 +15,13 @@ export class ElectricityComponent implements OnDestroy {
 
   private alive = true;
 
-  listData: Electricity[];
-  chartData: ElectricityChart[];
+  listData!: Electricity[];
+  chartData!: ElectricityChart[];
 
   type = 'week';
   types = ['week', 'month', 'year'];
 
-  currentTheme: string;
+  currentTheme!: string;
   themeSubscription: any;
 
   constructor(private electricityService: ElectricityData,

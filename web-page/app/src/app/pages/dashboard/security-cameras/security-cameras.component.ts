@@ -9,6 +9,7 @@ import { WebCamService } from '../../../services/web-cam/web-cam.service';
 
 
 @Component({
+  standalone: false,
   selector: 'ngx-security-cameras',
   styleUrls: ['./security-cameras.component.scss'],
   templateUrl: './security-cameras.component.html',
@@ -17,8 +18,8 @@ export class SecurityCamerasComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
 
-  cameras: Camera[];
-  selectedCamera: Camera;
+  cameras!: Camera[];
+  selectedCamera!: Camera;
   isSingleView = false;
   actionSize: NbComponentSize = 'medium';
   img = 'assets/images/camera1.jpg';

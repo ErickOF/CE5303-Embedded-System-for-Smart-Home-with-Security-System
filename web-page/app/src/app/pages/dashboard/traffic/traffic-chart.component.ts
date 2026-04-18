@@ -4,6 +4,7 @@ import { NbThemeService } from '@nebular/theme';
 import { LayoutService } from '../../../@core/utils';
 
 @Component({
+  standalone: false,
   selector: 'ngx-traffic-chart',
   template: `
     <div echarts
@@ -17,7 +18,7 @@ export class TrafficChartComponent implements AfterViewInit, OnDestroy {
 
   private alive = true;
 
-  @Input() points: number[];
+  @Input() points!: number[];
 
   type = 'month';
   types = ['week', 'month', 'year'];
@@ -39,7 +40,7 @@ export class TrafficChartComponent implements AfterViewInit, OnDestroy {
         delay(1),
         takeWhile(() => this.alive),
       )
-      .subscribe(config => {
+      .subscribe((config: any) => {
         const trafficTheme: any = config.variables.traffic;
 
         this.option = Object.assign({}, {
@@ -158,7 +159,7 @@ export class TrafficChartComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  onChartInit(echarts) {
+  onChartInit(echarts: any) {
     this.echartsIntance = echarts;
   }
 

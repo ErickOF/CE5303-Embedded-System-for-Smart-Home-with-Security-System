@@ -3,6 +3,7 @@ import { NbThemeService, NbMediaBreakpoint, NbMediaBreakpointsService } from '@n
 import { map } from 'rxjs/operators';
 
 @Component({
+  standalone: false,
   selector: 'ngx-rooms',
   styleUrls: ['./rooms.component.scss'],
   template: `
@@ -20,12 +21,12 @@ import { map } from 'rxjs/operators';
 export class RoomsComponent implements OnDestroy {
 
   @HostBinding('class.expanded')
-  private expanded: boolean;
-  private selected: number;
+  expanded = false;
+  private selected!: number;
 
-  isDarkTheme: boolean;
+  isDarkTheme!: boolean;
 
-  breakpoint: NbMediaBreakpoint;
+  breakpoint!: NbMediaBreakpoint;
   breakpoints: any;
   themeSubscription: any;
   themeChangeSubscription: any;
@@ -44,7 +45,7 @@ export class RoomsComponent implements OnDestroy {
       .subscribe((isDark: boolean) => this.isDarkTheme = isDark);
   }
 
-  select(roomNumber) {
+  select(roomNumber: number) {
     if (this.isSelected(roomNumber)) {
       this.expand();
     } else {
@@ -66,7 +67,7 @@ export class RoomsComponent implements OnDestroy {
     return !this.expanded;
   }
 
-  private isSelected(roomNumber): boolean {
+  private isSelected(roomNumber: number): boolean {
     return this.selected === roomNumber;
   }
 

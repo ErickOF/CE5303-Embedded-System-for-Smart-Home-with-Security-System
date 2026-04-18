@@ -5,6 +5,7 @@ import { map, takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 
 @Component({
+  standalone: false,
   selector: 'ngx-room-selector',
   templateUrl: './room-selector.component.html',
   styleUrls: ['./room-selector.component.scss'],
@@ -12,12 +13,12 @@ import { Subject } from 'rxjs';
 export class RoomSelectorComponent implements OnInit, OnDestroy {
 
   private destroy$ = new Subject<void>();
-  private hideGrid: boolean;
+  private hideGrid = false;
 
   @Output() select: EventEmitter<number> = new EventEmitter();
 
   selectedRoom = null;
-  sortedRooms = [];
+  sortedRooms: any[] = [];
   viewBox = '-20 -20 618.88 407.99';
   isIE = !!(navigator.userAgent.match(/Trident/)
             || navigator.userAgent.match(/MSIE/)
@@ -107,7 +108,7 @@ export class RoomSelectorComponent implements OnInit, OnDestroy {
     });
   }
 
-  selectRoom(roomNumber) {
+  selectRoom(roomNumber: any) {
     this.select.emit(roomNumber);
     this.selectedRoom = roomNumber;
     this.sortRooms();

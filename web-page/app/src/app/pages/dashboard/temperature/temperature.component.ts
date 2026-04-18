@@ -5,6 +5,7 @@ import { takeWhile } from 'rxjs/operators';
 import { forkJoin } from 'rxjs';
 
 @Component({
+  standalone: false,
   selector: 'ngx-temperature',
   styleUrls: ['./temperature.component.scss'],
   templateUrl: './temperature.component.html',
@@ -13,13 +14,13 @@ export class TemperatureComponent implements OnDestroy {
 
   private alive = true;
 
-  temperatureData: Temperature;
-  temperature: number;
+  temperatureData!: Temperature;
+  temperature!: number;
   temperatureOff = false;
   temperatureMode = 'cool';
 
-  humidityData: Temperature;
-  humidity: number;
+  humidityData!: Temperature;
+  humidity!: number;
   humidityOff = false;
   humidityMode = 'heat';
 
@@ -30,7 +31,7 @@ export class TemperatureComponent implements OnDestroy {
               private temperatureHumidityService: TemperatureHumidityData) {
     this.themeService.getJsTheme()
       .pipe(takeWhile(() => this.alive))
-      .subscribe(config => {
+      .subscribe((config: any) => {
       this.theme = config.variables.temperature;
     });
 

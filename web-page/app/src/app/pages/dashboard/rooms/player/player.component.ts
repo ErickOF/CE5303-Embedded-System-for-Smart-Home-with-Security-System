@@ -2,6 +2,7 @@ import { Component, HostBinding, Input, OnDestroy } from '@angular/core';
 import { PlayerService, Track } from '../../../../@core/utils/player.service';
 
 @Component({
+  standalone: false,
   selector: 'ngx-player',
   styleUrls: ['./player.component.scss'],
   templateUrl: './player.component.html',
@@ -9,11 +10,11 @@ import { PlayerService, Track } from '../../../../@core/utils/player.service';
 export class PlayerComponent implements OnDestroy {
   @Input()
   @HostBinding('class.collapsed')
-  collapsed: boolean;
+  collapsed = false;
 
   track: Track;
-  player: HTMLAudioElement;
-  shuffle: boolean;
+  player!: HTMLAudioElement;
+  shuffle = false;
 
   constructor(private playerService: PlayerService) {
     this.track = this.playerService.random();

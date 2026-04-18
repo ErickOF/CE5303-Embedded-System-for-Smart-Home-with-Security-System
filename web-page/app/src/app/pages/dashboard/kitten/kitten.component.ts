@@ -2,13 +2,14 @@ import { Component, OnDestroy } from '@angular/core';
 import { NbThemeService } from '@nebular/theme';
 
 @Component({
+  standalone: false,
   selector: 'ngx-kitten',
   styleUrls: ['./kitten.component.scss'],
   templateUrl: './kitten.component.html',
 })
 export class KittenComponent implements OnDestroy {
 
-  currentTheme: string;
+  currentTheme!: string;
   themeSubscription: any;
 
   constructor(private themeService: NbThemeService) {

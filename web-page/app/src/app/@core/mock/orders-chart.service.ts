@@ -15,7 +15,7 @@ export class OrdersChartService extends OrdersChartData {
     '2018',
   ];
 
-  private data = { };
+  private data: { [key: string]: any } = { };
 
   constructor(private period: PeriodsService) {
     super();

@@ -7,7 +7,7 @@ import { TrafficList, TrafficListData } from '../data/traffic-list';
 export class TrafficListService extends TrafficListData {
 
   private getRandom = (roundTo: number) => Math.round(Math.random() * roundTo);
-  private data = {};
+  private data: { [key: string]: any } = {};
 
   constructor(private period: PeriodsService) {
     super();
@@ -49,7 +49,7 @@ export class TrafficListService extends TrafficListData {
   }
 
   private reduceData(timePeriods: string[], getFirstDateInPeriod: () => string): TrafficList[] {
-    return timePeriods.reduce((result, timePeriod, index) => {
+    return timePeriods.reduce((result: any[], timePeriod: string, index: number) => {
       const hasResult = result[index - 1];
       const prevDate = hasResult ?
         result[index - 1].comparison.nextDate :
@@ -76,7 +76,7 @@ export class TrafficListService extends TrafficListData {
       };
 
       return [...result, item];
-    }, []);
+    }, [] as any[]) as TrafficList[];
   }
 
   getTrafficListData(period: string): Observable<TrafficList> {

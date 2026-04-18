@@ -24,7 +24,7 @@ export class EarningService extends EarningData {
     },
   ];
 
-  private liveUpdateChartData = {
+  private liveUpdateChartData: { [key: string]: any } = {
     bitcoin: {
       liveChart: [],
       delta: {
@@ -79,7 +79,7 @@ export class EarningService extends EarningData {
     };
   }
 
-  getEarningLiveUpdateCardData(currency): Observable<any[]> {
+  getEarningLiveUpdateCardData(currency: string): Observable<any[]> {
     const data = this.liveUpdateChartData[currency.toLowerCase()];
     const newValue = this.generateRandomLiveChartData();
 

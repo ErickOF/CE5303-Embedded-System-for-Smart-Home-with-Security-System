@@ -1,15 +1,15 @@
 import { Injectable } from '@angular/core';
 
 export class Track {
-  name: string;
-  artist: string;
-  url: string;
-  cover: string;
+  name!: string;
+  artist!: string;
+  url!: string;
+  cover!: string;
 }
 
 @Injectable()
 export class PlayerService {
-  current: number;
+  current!: number;
   playlist: Track[] = [
     {
       name: 'Don\'t Wanna Fight',

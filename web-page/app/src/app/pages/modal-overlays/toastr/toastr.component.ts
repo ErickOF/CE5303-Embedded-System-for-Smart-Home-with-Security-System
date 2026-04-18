@@ -9,6 +9,7 @@ import {
 } from '@nebular/theme';
 
 @Component({
+  standalone: false,
   selector: 'ngx-toastr',
   styleUrls: ['./toastr.component.scss'],
   templateUrl: './toastr.component.html',
@@ -16,7 +17,7 @@ import {
 export class ToastrComponent {
   constructor(private toastrService: NbToastrService) {}
 
-  config: NbToastrConfig;
+  config!: NbToastrConfig;
 
   index = 1;
   destroyByClick = true;
@@ -63,7 +64,7 @@ export class ToastrComponent {
     const type = this.types[typeIndex];
     const quote = this.quotes[quoteIndex];
 
-    this.showToast(type, quote.title, quote.body);
+    this.showToast(type, quote.title ?? '', quote.body);
   }
 
   private showToast(type: NbComponentStatus, title: string, body: string) {

@@ -4,6 +4,7 @@ import { MENU_ITEMS } from './pages-menu';
 
 @Component({
   selector: 'ngx-pages',
+  standalone: false,
   styleUrls: ['pages.component.scss'],
   template: `
     <ngx-one-column-layout>

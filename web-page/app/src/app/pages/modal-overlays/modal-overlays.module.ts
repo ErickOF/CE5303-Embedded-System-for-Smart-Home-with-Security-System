@@ -73,7 +73,7 @@ const MODULES = [
   NbTooltipModule,
 ];
 
-const SERVICES = [
+const SERVICES: any[] = [
 ];
 
 @NgModule({
@@ -85,9 +85,6 @@ const SERVICES = [
   ],
   providers: [
     ...SERVICES,
-  ],
-  entryComponents: [
-    ...ENTRY_COMPONENTS,
   ],
 })
 export class ModalOverlaysModule {

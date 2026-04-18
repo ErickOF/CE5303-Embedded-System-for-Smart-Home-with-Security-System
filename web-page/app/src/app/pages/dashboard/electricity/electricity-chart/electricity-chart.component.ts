@@ -5,6 +5,7 @@ import { LayoutService } from '../../../../@core/utils';
 import { ElectricityChart } from '../../../../@core/data/electricity';
 
 @Component({
+  standalone: false,
   selector: 'ngx-electricity-chart',
   styleUrls: ['./electricity-chart.component.scss'],
   template: `
@@ -20,7 +21,7 @@ export class ElectricityChartComponent implements AfterViewInit, OnDestroy {
 
   private alive = true;
 
-  @Input() data: ElectricityChart[];
+  @Input() data!: ElectricityChart[];
 
   option: any;
   echartsIntance: any;
@@ -40,7 +41,7 @@ export class ElectricityChartComponent implements AfterViewInit, OnDestroy {
         takeWhile(() => this.alive),
         delay(1),
       )
-      .subscribe(config => {
+      .subscribe((config: any) => {
         const eTheme: any = config.variables.electricity;
 
         this.option = {
@@ -182,7 +183,7 @@ export class ElectricityChartComponent implements AfterViewInit, OnDestroy {
     });
   }
 
-  onChartInit(echarts) {
+  onChartInit(echarts: any) {
     this.echartsIntance = echarts;
   }
 

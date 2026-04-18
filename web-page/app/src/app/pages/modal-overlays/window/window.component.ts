@@ -4,17 +4,18 @@ import { WindowFormComponent } from './window-form/window-form.component';
 
 @Component({
   selector: 'ngx-window',
+  standalone: false,
   templateUrl: 'window.component.html',
   styleUrls: ['window.component.scss'],
 })
 export class WindowComponent {
 
-  @ViewChild('contentTemplate', { static: true }) contentTemplate: TemplateRef<any>;
-  @ViewChild('disabledEsc', { read: TemplateRef, static: true }) disabledEscTemplate: TemplateRef<HTMLElement>;
+  @ViewChild('contentTemplate', { static: true }) contentTemplate!: TemplateRef<any>;
+  @ViewChild('disabledEsc', { read: TemplateRef, static: true }) disabledEscTemplate!: TemplateRef<HTMLElement>;
 
   constructor(private windowService: NbWindowService) {}
 
-  openWindow(contentTemplate) {
+  openWindow(contentTemplate: TemplateRef<any>) {
     this.windowService.open(
       contentTemplate,
       {

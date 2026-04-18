@@ -5,6 +5,7 @@ import { NbThemeService } from '@nebular/theme';
 declare const echarts: any;
 
 @Component({
+  standalone: false,
   selector: 'ngx-solar',
   styleUrls: ['./solar.component.scss'],
   template: `
@@ -43,7 +44,7 @@ export class SolarComponent implements AfterViewInit, OnDestroy {
   }
 
   ngAfterViewInit() {
-    this.themeSubscription = this.theme.getJsTheme().pipe(delay(1)).subscribe(config => {
+    this.themeSubscription = this.theme.getJsTheme().pipe(delay(1)).subscribe((config: any) => {
 
       const solarTheme: any = config.variables.solar;
 

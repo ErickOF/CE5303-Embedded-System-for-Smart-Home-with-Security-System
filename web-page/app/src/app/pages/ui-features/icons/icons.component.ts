@@ -3,13 +3,14 @@ import { NbIconLibraries } from '@nebular/theme';
 
 @Component({
   selector: 'ngx-icons',
+  standalone: false,
   styleUrls: ['./icons.component.scss'],
   templateUrl: './icons.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class IconsComponent {
 
-  evaIcons = [];
+  evaIcons: string[] = [];
 
   constructor(iconsLibrary: NbIconLibraries) {
     this.evaIcons = Array.from(iconsLibrary.getPack('eva').icons.keys())

@@ -5,12 +5,13 @@ import { HttpClient, HttpHeaders, HttpHandler } from '@angular/common/http';
 import { LoginService } from './../../services/auth/login/login.service';
 
 @Component({
+  standalone: false,
   selector: 'ngx-login',
   templateUrl: './login.component.html',
 })
 export class LoginComponent extends NbLoginComponent {
 
-  public _login(value) {
+  public _login(value: any) {
     if (value.email === 'root' && value.password === 'root') {
       this.router.navigate(['pages/iot-dashboard']);
     }

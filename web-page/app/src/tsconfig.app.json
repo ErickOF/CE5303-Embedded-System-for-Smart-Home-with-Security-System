@@ -2,12 +2,14 @@
   "extends": "../tsconfig.base.json",
   "compilerOptions": {
     "outDir": "../out-tsc/app",
-    "baseUrl": "./"
+    "baseUrl": "./",
+    "ignoreDeprecations": "6.0"
   },
   "exclude": [
     "test.ts",
     "**/*.spec.ts",
-    "../node_modules/@nebular/**/*.spec.ts"
+    "../node_modules/@nebular/**/*.spec.ts",
+    "../node_modules/@nebular/**/schematics/**"
   ],
   "include": [
     "../src/*.ts",

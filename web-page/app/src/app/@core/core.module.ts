@@ -101,7 +101,7 @@ export class NbSimpleRoleProvider extends NbRoleProvider {
 }
 
 export const NB_CORE_PROVIDERS = [
-  ...MockDataModule.forRoot().providers,
+  ...(MockDataModule.forRoot().providers ?? []),
   ...DATA_SERVICES,
   ...NbAuthModule.forRoot({
 
@@ -119,7 +119,7 @@ export const NB_CORE_PROVIDERS = [
         socialLinks: socialLinks,
       },
     },
-  }).providers,
+  }).providers ?? [],
 
   NbSecurityModule.forRoot({
     accessControl: {
@@ -133,7 +133,7 @@ export const NB_CORE_PROVIDERS = [
         remove: '*',
       },
     },
-  }).providers,
+  }).providers ?? [],
 
   {
     provide: NbRoleProvider, useClass: NbSimpleRoleProvider,

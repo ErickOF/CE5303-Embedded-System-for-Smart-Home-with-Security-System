@@ -6,6 +6,7 @@ import { DoorsService } from '../../../services/doors/doors.service';
 
 
 @Component({
+  standalone: false,
   selector: 'ngx-status-card',
   styleUrls: ['./status-card.component.scss'],
   template: `
@@ -24,10 +25,10 @@ import { DoorsService } from '../../../services/doors/doors.service';
   `,
 })
 export class StatusCardComponent implements OnInit {
-  @Input() title: string;
-  @Input() type: string;
+  @Input() title!: string;
+  @Input() type!: string;
   @Input() on = false;
-  @Input() value: string;
+  @Input() value!: string;
   cont = 0;
 
   constructor(
@@ -45,7 +46,7 @@ export class StatusCardComponent implements OnInit {
 
   public changeLightState() {
     this.lightService.changeLightState(this.value, this.on ? 0 : 1)
-      .subscribe((response) => {
+      .subscribe((response: any) => {
         if (!response['error']) {
           this.on = !this.on;
         }
@@ -54,23 +55,23 @@ export class StatusCardComponent implements OnInit {
 
   public getDoorState() {
     this.doorService.getDoorState(this.value)
-      .subscribe((response) => {
+      .subscribe((response: any) => {
         if (!response['error']) {
           this.on = response['data']['state'] !== 0;
         }
 
         setTimeout(() => this.getDoorState(), 100);
-      }, (error) => setTimeout(() => this.getDoorState(), 100));
+      }, (error: any) => setTimeout(() => this.getDoorState(), 100));
   }
 
   public getLightState() {
     this.lightService.getLightState(this.value)
-      .subscribe((response) => {
+      .subscribe((response: any) => {
         if (!response['error']) {
           this.on = response['data']['state'] !== 0;
         }
 
         setTimeout(() => this.getLightState(), 100);
-      }, (error) => setTimeout(() => this.getLightState(), 100));
+      }, (error: any) => setTimeout(() => this.getLightState(), 100));
   }
 }

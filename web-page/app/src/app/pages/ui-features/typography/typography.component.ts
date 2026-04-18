@@ -3,11 +3,12 @@ import { NbThemeService, NbMediaBreakpoint, NbMediaBreakpointsService } from '@n
 
 @Component({
   selector: 'ngx-typography',
+  standalone: false,
   styleUrls: ['./typography.component.scss'],
   templateUrl: './typography.component.html',
 })
 export class TypographyComponent implements OnDestroy {
-  breakpoint: NbMediaBreakpoint;
+  breakpoint!: NbMediaBreakpoint;
   breakpoints: any;
   themeSubscription: any;
 

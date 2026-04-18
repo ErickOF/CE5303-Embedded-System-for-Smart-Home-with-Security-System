@@ -12,6 +12,7 @@ interface CardSettings {
 }
 
 @Component({
+  standalone: false,
   selector: 'ngx-dashboard',
   styleUrls: ['./dashboard.component.scss'],
   templateUrl: './dashboard.component.html',
@@ -20,7 +21,7 @@ export class DashboardComponent implements OnDestroy {
 
   private alive = true;
 
-  solarValue: number;
+  solarValue!: number;
   lightCard: CardSettings = {
     title: 'Light',
     iconClass: 'nb-lightbulb',
@@ -34,7 +35,7 @@ export class DashboardComponent implements OnDestroy {
     value: '',
   };
 
-  statusCards: string;
+  statusCards!: CardSettings[];
 
   commonStatusCardsSet: CardSettings[] = [
     {
@@ -98,6 +99,7 @@ export class DashboardComponent implements OnDestroy {
     cosmic: CardSettings[];
     corporate: CardSettings[];
     dark: CardSettings[];
+    [key: string]: CardSettings[];
   } = {
     default: this.commonStatusCardsSet,
     cosmic: this.commonStatusCardsSet,
