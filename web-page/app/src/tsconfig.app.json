@@ -5,6 +5,9 @@
     "baseUrl": "./",
     "ignoreDeprecations": "6.0"
   },
+  "angularCompilerOptions": {
+    "strictTemplates": false
+  },
   "exclude": [
     "test.ts",
     "**/*.spec.ts",

@@ -97,7 +97,7 @@
     "sass": "1.102.0",
     "stylelint": "17.14.1",
     "ts-node": "10.9.2",
-    "typescript": "7.0.2"
+    "typescript": "6.0.3"
   },
   "allowScripts": {
     "@compodoc/compodoc@2.0.0": true,
