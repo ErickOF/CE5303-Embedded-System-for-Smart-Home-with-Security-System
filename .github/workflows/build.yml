@@ -1,0 +1,97 @@
+name: Build project components
+
+on:
+  push:
+    paths:
+      - "web-page/**"
+      - "server/**"
+      - "libgpio*/**"
+      - ".github/workflows/build.yml"
+  pull_request:
+    paths:
+      - "web-page/**"
+      - "server/**"
+      - "libgpio*/**"
+      - ".github/workflows/build.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  web-page:
+    name: Build web page
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web-page/app
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: web-page/app/.nvmrc
+          cache: npm
+          cache-dependency-path: web-page/app/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build production bundle
+        run: npm run build:prod
+
+  server:
+    name: Build server
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: server
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: server/requirements.txt
+
+      - name: Install dependencies
+        run: python -m pip install -r requirements.txt
+
+      - name: Compile Python sources
+        run: python -m compileall -q .
+
+  lbgpio:
+    name: Build ${{ matrix.project }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        project:
+          - libgpiodriver-1.0
+          - libgpioman-1.0
+    defaults:
+      run:
+        working-directory: ${{ matrix.project }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install Autotools dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends -y autoconf automake libtool
+
+      - name: Configure
+        run: ./configure
+
+      - name: Build
+        run: make --jobs "$(nproc)"
