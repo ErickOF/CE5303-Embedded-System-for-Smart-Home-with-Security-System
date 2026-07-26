@@ -88,7 +88,7 @@ jobs:
       - name: Install Autotools dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install --no-install-recommends -y autoconf automake libtool
+          sudo apt-get install --no-install-recommends -y build-essential autoconf automake libtool
 
       - name: Configure
         run: ./configure
