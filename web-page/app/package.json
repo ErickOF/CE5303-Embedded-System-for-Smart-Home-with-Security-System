@@ -48,7 +48,7 @@
     "@angular/forms": "22.0.8",
     "@angular/platform-browser": "22.0.8",
     "@angular/platform-browser-dynamic": "22.0.8",
-    "@angular/router": "22.0.8",
+    "@angular/router": "22.2.3",
     "@nebular/auth": "17.0.0",
     "@nebular/eva-icons": "17.0.0",
     "@nebular/security": "17.0.0",
@@ -73,7 +73,7 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "22.0.8",
-    "@angular/cli": "22.0.8",
+    "@angular/cli": "22.2.3",
     "@angular/compiler-cli": "22.0.8",
     "@angular/language-service": "22.0.8",
     "@compodoc/compodoc": "2.0.0",
