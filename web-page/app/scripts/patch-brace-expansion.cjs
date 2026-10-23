@@ -4,8 +4,8 @@ const path = require('node:path');
 const packageJsonPath = require.resolve('brace-expansion/package.json');
 const packageJson = JSON.parse(fs.readFileSync(packageJsonPath, 'utf8'));
 
-if (packageJson.version !== '5.0.8') {
-  throw new Error(`Expected brace-expansion 5.0.8, found ${packageJson.version}`);
+if (packageJson.version !== '5.0.12') {
+  throw new Error(`Expected brace-expansion 5.0.12, found ${packageJson.version}`);
 }
 
 const commonJsPath = path.join(path.dirname(packageJsonPath), 'dist', 'commonjs', 'index.js');
